@@ -1,6 +1,6 @@
 {
   "name": "MycilaTaskMonitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Arduino / ESP32 library to monitor task priority and stack high watermark",
   "homepage": "https://github.com/mathieucarbou/MycilaTaskMonitor",
   "repository": {
@@ -27,7 +27,7 @@
     {
       "owner": "mathieucarbou",
       "name": "MycilaLogger",
-      "version": "^2.0.1",
+      "version": "^2.0.2",
       "platforms": "espressif32"
     }
   ],
