@@ -4,8 +4,12 @@
  */
 #pragma once
 
-#include <ArduinoJson.h>
 #include <vector>
+#include <algorithm>
+
+#ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
+#include <ArduinoJson.h>
+#endif
 
 #define MYCILA_TASK_MONITOR_VERSION "1.0.2"
 #define MYCILA_TASK_MONITOR_VERSION_MAJOR 1
@@ -38,7 +42,9 @@ namespace Mycila {
           _taskNames.erase(it);
       }
 
+#ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
       void toJson(const JsonObject& root) const;
+#endif
 
     private:
       bool _enabled = false;

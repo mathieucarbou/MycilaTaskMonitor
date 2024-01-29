@@ -2,9 +2,8 @@
 /*
  * Copyright (C) 2023-2024 Mathieu Carbou and others
  */
+#include <Arduino.h>
 #include <MycilaTaskMonitor.h>
-
-#include <MycilaLogger.h>
 
 #define TAG "MONITOR"
 
@@ -29,19 +28,20 @@ void Mycila::TaskMonitorClass::loop() {
         const UBaseType_t size = uxTaskGetStackHighWaterMark(handle);
         const UBaseType_t priority = uxTaskPriorityGet(handle);
         if (size < MYCILA_TASK_MONITOR_STACK_FREE_MIN)
-          Mycila::Logger.warn(TAG, "%-10.10s (p=%u) %u bytes", name, priority, size);
+          ESP_LOGW(TAG, "%-10.10s (p=%u) %u bytes", name, priority, size);
         else if (size > MYCILA_TASK_MONITOR_STACK_FREE_MAX)
-          Mycila::Logger.info(TAG, "%-10.10s (p=%u) %u bytes", name, priority, size);
+          ESP_LOGI(TAG, "%-10.10s (p=%u) %u bytes", name, priority, size);
         else
-          Mycila::Logger.debug(TAG, "%-10.10s (p=%u) %u bytes", name, priority, size);
+          ESP_LOGD(TAG, "%-10.10s (p=%u) %u bytes", name, priority, size);
       } else {
-        Logger.warn(TAG, "%-10.10s Handle not accessible", name);
+        ESP_LOGW(TAG, "%-10.10s Handle not found", name);
       }
     }
     _last = millis();
   }
 }
 
+#ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
 void Mycila::TaskMonitorClass::toJson(const JsonObject& root) const {
   for (const char* name : _taskNames) {
     TaskHandle_t handle = xTaskGetHandle(name);
@@ -51,6 +51,7 @@ void Mycila::TaskMonitorClass::toJson(const JsonObject& root) const {
     }
   }
 }
+#endif
 
 namespace Mycila {
   TaskMonitorClass TaskMonitor;

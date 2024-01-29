@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <MycilaTaskMonitor.h>
+#include <ArduinoJson.h>
 
 void _task1(void* params) {
   while (true) {
@@ -28,5 +29,9 @@ void setup() {
 }
 
 void loop() {
-  Mycila::TaskMonitor.loop();
+  JsonDocument doc;
+  Mycila::TaskMonitor.toJson(doc.to<JsonObject>());
+  serializeJson(doc, Serial);
+  Serial.println();
+  delay(2000);
 }
