@@ -8,8 +8,8 @@ Arduino / ESP32 library to monitor task priority and stack high watermark
 
 This helps monitor stack sizes and correctly set the stack size of each task.
 
-- Configurable frequency with `MYCILA_TASK_MONITOR_FREQUENCY`
-- `loop()` is optional: you can call `toJson()` at any time to get the information
+- `toJson()` to get stack info
+- `log()` to log stack info
 - Configurable warning thresholds with `MYCILA_TASK_MONITOR_STACK_FREE_MIN` and `MYCILA_TASK_MONITOR_STACK_FREE_MAX`: depending on these level, the loop will log as warnings or info.
 
 ## Usage

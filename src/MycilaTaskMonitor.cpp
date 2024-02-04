@@ -20,8 +20,8 @@ void Mycila::TaskMonitorClass::end() {
   _enabled = false;
 }
 
-void Mycila::TaskMonitorClass::loop() {
-  if (_enabled && _taskNames.size() > 0 && millis() - _last > MYCILA_TASK_MONITOR_FREQUENCY) {
+void Mycila::TaskMonitorClass::log() {
+  if (_enabled && _taskNames.size() > 0) {
     for (const char* name : _taskNames) {
       const TaskHandle_t handle = xTaskGetHandle(name);
       if (handle) {
@@ -36,7 +36,6 @@ void Mycila::TaskMonitorClass::loop() {
         ESP_LOGW(TAG, "%-10.10s Handle not found", name);
       }
     }
-    _last = millis();
   }
 }
 

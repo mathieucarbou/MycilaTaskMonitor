@@ -16,10 +16,6 @@
 #define MYCILA_TASK_MONITOR_VERSION_MINOR 1
 #define MYCILA_TASK_MONITOR_VERSION_REVISION 0
 
-#ifndef MYCILA_TASK_MONITOR_FREQUENCY
-#define MYCILA_TASK_MONITOR_FREQUENCY 10000
-#endif
-
 #ifndef MYCILA_TASK_MONITOR_STACK_FREE_MIN
 #define MYCILA_TASK_MONITOR_STACK_FREE_MIN 128
 #endif
@@ -32,7 +28,6 @@ namespace Mycila {
   class TaskMonitorClass {
     public:
       void begin(const size_t expectedTaskCount = 0);
-      void loop();
       void end();
 
       void addTask(const char* name) { _taskNames.push_back(name); }
@@ -42,13 +37,14 @@ namespace Mycila {
           _taskNames.erase(it);
       }
 
+      void log();
+
 #ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
       void toJson(const JsonObject& root) const;
 #endif
 
     private:
       bool _enabled = false;
-      uint32_t _last = 0;
       std::vector<const char*> _taskNames;
   };
 
