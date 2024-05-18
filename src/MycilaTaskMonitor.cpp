@@ -5,6 +5,20 @@
 #include <Arduino.h>
 #include <MycilaTaskMonitor.h>
 
+#ifdef MYCILA_LOGGER_SUPPORT
+#include <MycilaLogger.h>
+extern Mycila::Logger logger;
+#define LOGD(tag, format, ...) logger.debug(tag, format, ##__VA_ARGS__)
+#define LOGI(tag, format, ...) logger.info(tag, format, ##__VA_ARGS__)
+#define LOGW(tag, format, ...) logger.warn(tag, format, ##__VA_ARGS__)
+#define LOGE(tag, format, ...) logger.error(tag, format, ##__VA_ARGS__)
+#else
+#define LOGD(tag, format, ...) ESP_LOGD(tag, format, ##__VA_ARGS__)
+#define LOGI(tag, format, ...) ESP_LOGI(tag, format, ##__VA_ARGS__)
+#define LOGW(tag, format, ...) ESP_LOGW(tag, format, ##__VA_ARGS__)
+#define LOGE(tag, format, ...) ESP_LOGE(tag, format, ##__VA_ARGS__)
+#endif
+
 #define TAG "MONITOR"
 
 void Mycila::TaskMonitorClass::begin(const size_t expectedTaskCount) {
@@ -27,13 +41,13 @@ void Mycila::TaskMonitorClass::log() {
       if (handle) {
         const UBaseType_t size = uxTaskGetStackHighWaterMark(handle);
         if (size < MYCILA_TASK_MONITOR_STACK_FREE_MIN)
-          ESP_LOGW(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
+          LOGW(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
         else if (size > MYCILA_TASK_MONITOR_STACK_FREE_MAX)
-          ESP_LOGI(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
+          LOGI(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
         else
-          ESP_LOGD(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
+          LOGD(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
       } else {
-        ESP_LOGW(TAG, "%-10.10s Handle not found", name);
+        LOGE(TAG, "%-10.10s Handle not found", name);
       }
     }
   }
