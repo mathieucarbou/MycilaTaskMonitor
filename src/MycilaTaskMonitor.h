@@ -7,7 +7,7 @@
 #include <vector>
 #include <algorithm>
 
-#ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
+#ifdef MYCILA_JSON_SUPPORT
 #include <ArduinoJson.h>
 #endif
 
@@ -39,7 +39,7 @@ namespace Mycila {
 
       void log();
 
-#ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
+#ifdef MYCILA_JSON_SUPPORT
       void toJson(const JsonObject& root) const;
 #endif
 

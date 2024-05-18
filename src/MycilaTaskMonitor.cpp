@@ -53,7 +53,7 @@ void Mycila::TaskMonitorClass::log() {
   }
 }
 
-#ifdef MYCILA_TASK_MONITOR_JSON_SUPPORT
+#ifdef MYCILA_JSON_SUPPORT
 void Mycila::TaskMonitorClass::toJson(const JsonObject& root) const {
   for (const char* name : _taskNames) {
     TaskHandle_t handle = xTaskGetHandle(name);
