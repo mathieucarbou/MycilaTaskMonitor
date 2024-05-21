@@ -4,8 +4,8 @@
  */
 #pragma once
 
-#include <vector>
 #include <algorithm>
+#include <vector>
 
 #ifdef MYCILA_JSON_SUPPORT
 #include <ArduinoJson.h>
@@ -20,10 +20,6 @@
 #define MYCILA_TASK_MONITOR_STACK_FREE_MIN 256
 #endif
 
-#ifndef MYCILA_TASK_MONITOR_STACK_FREE_MAX
-#define MYCILA_TASK_MONITOR_STACK_FREE_MAX 1024
-#endif
-
 namespace Mycila {
   class TaskMonitorClass {
     public:
@@ -31,11 +27,7 @@ namespace Mycila {
       void end();
 
       void addTask(const char* name) { _taskNames.push_back(name); }
-      void removeTask(const char* name) {
-        auto it = std::find(_taskNames.begin(), _taskNames.end(), name);
-        if (it != _taskNames.end())
-          _taskNames.erase(it);
-      }
+      void removeTask(const char* name) { _taskNames.erase(std::remove(_taskNames.begin(), _taskNames.end(), name), _taskNames.end()); }
 
       void log();
 

@@ -42,10 +42,8 @@ void Mycila::TaskMonitorClass::log() {
         const UBaseType_t size = uxTaskGetStackHighWaterMark(handle);
         if (size < MYCILA_TASK_MONITOR_STACK_FREE_MIN)
           LOGW(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
-        else if (size > MYCILA_TASK_MONITOR_STACK_FREE_MAX)
-          LOGI(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
         else
-          LOGD(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
+          LOGI(TAG, "%-10.10s (p=%u) %u bytes", name, uxTaskPriorityGet(handle), size);
       } else {
         LOGE(TAG, "%-10.10s Handle not found", name);
       }
