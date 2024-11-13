@@ -2,8 +2,12 @@
 /*
  * Copyright (C) 2023-2024 Mathieu Carbou
  */
-#include <Arduino.h>
 #include <MycilaTaskMonitor.h>
+
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
+
+#include <esp32-hal-log.h>
 
 #ifdef MYCILA_LOGGER_SUPPORT
 #include <MycilaLogger.h>
