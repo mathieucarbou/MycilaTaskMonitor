@@ -7,8 +7,6 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#include <esp32-hal-log.h>
-
 #ifdef MYCILA_LOGGER_SUPPORT
 #include <MycilaLogger.h>
 extern Mycila::Logger logger;
@@ -22,6 +20,8 @@ extern Mycila::Logger logger;
 #define LOGW(tag, format, ...) ESP_LOGW(tag, format, ##__VA_ARGS__)
 #define LOGE(tag, format, ...) ESP_LOGE(tag, format, ##__VA_ARGS__)
 #endif
+
+#include <esp32-hal-log.h>
 
 #define TAG "MONITOR"
 
