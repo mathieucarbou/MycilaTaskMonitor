@@ -25,7 +25,7 @@ void setup() {
 }
 
 void loop() {
-  Mycila::TaskMonitor.loop();
+  Mycila::TaskMonitor.log();
   delay(1000);
 }
 ```
