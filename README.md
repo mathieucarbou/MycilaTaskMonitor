@@ -39,3 +39,5 @@ D       588208 loopTask   (1) MONITOR    mqttclient (p=1) 544 bytes
 D       588221 loopTask   (1) MONITOR    jsyTask    (p=1) 296 bytes
 D       588222 loopTask   (1) MONITOR    ioTask     (p=1) 464 bytes
 ```
+
+Compile with `-D MYCILA_JSON_SUPPORT` to activate json support (requires ArduinoJson library).

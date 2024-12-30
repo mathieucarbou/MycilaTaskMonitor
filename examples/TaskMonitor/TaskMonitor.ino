@@ -18,7 +18,6 @@ void setup() {
   while (!Serial)
     continue;
 
-  Mycila::TaskMonitor.begin(3);
   Mycila::TaskMonitor.addTask("loopTask");
   Mycila::TaskMonitor.addTask("task1");
   Mycila::TaskMonitor.addTask("task2");
