@@ -101,5 +101,5 @@ jobs:
           pip install --upgrade platformio
           pip install --upgrade cryptography
       
-      - run: PLATFORMIO_SRC_DIR=examples/ConfTaskMonitorig PIO_BOARD=${{ matrix.board }} pio run -e ${{ matrix.env }}
+      - run: PLATFORMIO_SRC_DIR=examples/TaskMonitor PIO_BOARD=${{ matrix.board }} pio run -e ${{ matrix.env }}
       - run: PLATFORMIO_SRC_DIR=examples/TaskMonitorJson PIO_BOARD=${{ matrix.board }} pio run -e ${{ matrix.env }}
